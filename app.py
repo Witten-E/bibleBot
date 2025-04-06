@@ -22,9 +22,7 @@ def message_received(args, message):
     channel_id = message.get("channel", "")
     # print("args = " + str(args))
     # print("message = " + str(message))
-    
-    if channel_id != "C06HLL9CL": # botspam channel
-      quit()
+
       
     respond_to = args.client.conversations_replies(channel=channel_id, ts=thread_ts).get("messages")[0]
     # print(str(respond_to))
