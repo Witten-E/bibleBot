@@ -26,7 +26,6 @@ def message_received(args, message):
       
     message_list = args.client.conversations_replies(channel=channel_id, ts=thread_ts).get("messages")
     respond_to = message_list[-2]
-    print(message_list)
     # print(str(respond_to))
     response = biblePython.checkMessage.generate_response(respond_to.get("text"))
     args.client.chat_postMessage(
