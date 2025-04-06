@@ -29,7 +29,11 @@ def message_received(args, message):
     respond_to = args.client.conversations_replies(channel=channel_id, ts=thread_ts).get("messages")[0]
     # print(str(respond_to))
     response = biblePython.checkMessage.generate_response(respond_to.get("text"))
-    args.say(response)
+    args.client.chat_postMessage(
+    channel=channel_id,
+    thread_ts=thread_ts,
+    text=response
+    )
     # We must do this if nothing else just to say we got the message!
     # (args.say is special and will do it for us)
     args.ack()
