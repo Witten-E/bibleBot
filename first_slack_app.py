@@ -6,8 +6,6 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 from slack_sdk.errors import SlackApiError
 import biblePython
 import biblePython.checkMessage
-from slack_sdk.socket_mode.response import SocketModeResponse
-from slack_sdk.socket_mode.request import SocketModeRequest
 
 dotenv.load_dotenv()
 
@@ -20,26 +18,17 @@ def message_received(args, message):
   if thread_ts and any(sub in message["text"] for sub in biblePython.checkMessage.QUESTIONS) :
     thread_ts=message.get("thread_ts")
     channel_id = message.get("channel", "")
-    # print("args = " + str(args))
-    # print("message = " + str(message))
-    
     if channel_id != "C06HLL9CL": # botspam channel
-      quit()
-      
-    respond_to = args.client.conversations_replies(channel=channel_id, ts=thread_ts).get("messages")[0]
-    # print(str(respond_to))
-    response = biblePython.checkMessage.generate_response(respond_to.get("text"))
+      quit
+    respond_to = args.client.conversations_replies(channel=channel_id, ts=thread_ts)[0]
+    response = biblePython.checkMessage.generate_response(respond_to)
     args.say(response)
     # We must do this if nothing else just to say we got the message!
     # (args.say is special and will do it for us)
     args.ack()
 
-@app.event("message")
-def handle_message_events(args, event):
-  args.ack()
-
-@app.event("reaction_added")
-def on_reaction(args, event):
+# @app.event("reaction_added")
+# def on_reaction(args, event):
 #   # We're only interested in pog reacts to messages
 #   if event["item"]["type"] != "message" or event["reaction"] != "marypog":
 #     args.ack()
@@ -60,15 +49,14 @@ def on_reaction(args, event):
 #       raise err
 
 #   # Must acknowledge
-  args.ack()
+#   args.ack()
 
-@app.event("reaction_removed")
-def on_reaction_removed(args, event):
-  # Must acknowledge
-  args.ack()
+# @app.event("reaction_removed")
+# def on_reaction_removed(args, event):
+#   # Must acknowledge
+#   args.ack()
 
 
-# Start your app
-if __name__ == "__main__":
-  print("Starting app!\n")
-  SocketModeHandler(app, os.environ["APP_LEVEL_TOKEN"]).start()
+# # Start your app
+# if __name__ == "__main__":
+#   SocketModeHandler(app, os.environ["APP_LEVEL_TOKEN"]).start()

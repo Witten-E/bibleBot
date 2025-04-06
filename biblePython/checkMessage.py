@@ -5,7 +5,7 @@ Author: Eva Witten
 """
 import bible, re
 
-QUESTIONS = ["how much bible?", "none of those words were in the bible", "biblebot?", "nwib"]
+QUESTIONS = ["how much bible", "none of those words were in the bible", "biblebot", "nwib"]
 
 
 # from dictCreation.py
@@ -32,7 +32,7 @@ def generate_response(message):
     ratio, not_in_bible = find_ratio(message)
     if ratio == 0:
         return "That is correct! None of those words are in the bible"
-    return f"Incorrect. {ratio}% of those words were in the bible. The words not in the bible include {not_in_bible}." 
+    return f"Incorrect. {int(ratio*100)}% of those words were in the bible. The words not in the bible include {not_in_bible}." 
     
 
 

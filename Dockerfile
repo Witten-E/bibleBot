@@ -6,5 +6,7 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
+ENV PYTHONPATH=/app/biblePython
+
 ENTRYPOINT ["/usr/bin/env", "python3"]
 CMD ["app.py"]
