@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import dotenv
 import os
+import re
 from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 from slack_sdk.errors import SlackApiError
@@ -25,10 +26,29 @@ def message_received(args, message):
 
       
     message_list = args.client.conversations_replies(channel=channel_id, ts=thread_ts).get("messages")
-    for mess in reversed(message_list):
-      if mess.get("ts") == message.get("ts"):
-        respond_to = message_list[message_list.index(mess)-1]
-        break
+    text = message.get("text")
+    
+    keyword = "thread:"
+    pos = text.find(keyword)
+    if pos != -1:
+        # Start reading after 'thread:'
+        start = pos + len(keyword)
+        end = start
+
+        # Collect digits
+        while end < len(text) and text[end].isdigit():
+            end += 1
+
+        if end > start:
+            index = int(text[start:end])
+            if 0 <= index < len(message_list):
+                respond_to = message_list[index]
+    
+    else:
+      for mess in reversed(message_list):
+        if mess.get("ts") == message.get("ts"):
+          respond_to = message_list[message_list.index(mess)-1]
+          break
     # respond_to = message_list[-2]
     # print(str(respond_to))
     response = biblePython.checkMessage.generate_response(respond_to.get("text"))

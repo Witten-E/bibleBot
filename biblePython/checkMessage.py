@@ -20,12 +20,13 @@ def message_to_list(message):
 def find_ratio(message):
     count = 0
     words = message_to_list(message)
-    not_in_bible = []
+    not_in_bible = set()
     for word in words:
+        word = word.strip(".'\"\\/!@#$%^&*()_+}{:<>?,`~|")
         if word in bible.BIBLE_DICT:
             count += 1
         else:
-            not_in_bible.append(word)
+            not_in_bible.add(word)
     return count/len(words), not_in_bible
 
 def generate_response(message):
