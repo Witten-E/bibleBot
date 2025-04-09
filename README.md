@@ -12,6 +12,5 @@ Because I'm bad at git things, this repo did not exist for a while while I was w
 
 
 TODO: 
-1. get the OKD webhook to actually update the container because it's currently using an out-of-date version
-2. adding profile photo to the bot and updating the username to Robot Jesus (hate working with slack) 
-3. adding more trigger words and parameters so people can display whether they the words in/out of bible to be printed or none.
+1. adding profile photo to the bot and updating the username to Robot Jesus (hate working with slack) 
+2. adding more trigger words and parameters so people can display whether they the words in/out of bible to be printed or none.
