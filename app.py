@@ -37,7 +37,7 @@ def message_received(args, message):
 
         # Collect digits
         while end < len(text) and text[end].isdigit():
-            end += 1
+            end += 1 
 
         if end > start:
             index = int(text[start:end])
