@@ -5,7 +5,7 @@ Author: Eva Witten
 """
 import bible, re
 
-QUESTIONS = ["how much bible", "none of those words were in the bible", "biblebot", "nwib"]
+QUESTIONS = ["how much bible", "none of those words were in the bible", "biblebot help", "nwib"]
 
 
 # from dictCreation.py
@@ -22,7 +22,7 @@ def find_ratio(message):
     words = message_to_list(message)
     not_in_bible = set()
     for word in words:
-        word = word.strip(".'\"\\/!@#$%^&*()_+}{:<>?,`~|")
+        word = word.lower().strip(".'\"\\/!@#$%^&*()_+}{:<>?,`~|")
         if word in bible.BIBLE_DICT:
             count += 1
         else:

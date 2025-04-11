@@ -18,7 +18,7 @@ app = App(token=os.environ.get("BOT_USER_OAUTH_TOKEN"))
 @app.message()
 def message_received(args, message):
   thread_ts=message.get("thread_ts")
-  if thread_ts and any(sub in message["text"] for sub in biblePython.checkMessage.QUESTIONS) :
+  if thread_ts and any(sub.lower() in message["text"].lower() for sub in biblePython.checkMessage.QUESTIONS):
     thread_ts=message.get("thread_ts")
     channel_id = message.get("channel", "")
     # print("args = " + str(args))
