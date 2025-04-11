@@ -33,6 +33,8 @@ def generate_response(message):
     ratio, not_in_bible = find_ratio(message)
     if ratio == 0:
         return "That is correct! None of those words are in the bible"
+    elif ratio == 1:
+        return f"damn, you could not be more wrong. 100% of those words were in the bible"
     return f"Incorrect. {int(ratio*100)}% of those words were in the bible. The words not in the bible include {not_in_bible}." 
     
 
