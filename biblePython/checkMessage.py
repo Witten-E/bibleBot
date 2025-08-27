@@ -5,7 +5,7 @@ Author: Eva Witten
 """
 import bible, re
 
-QUESTIONS = ["how much bible", "none of those words were in the bible", "biblebot help", "nwib"]
+QUESTIONS = ["how much bible", "none of those words were in the bible", "biblebot help", "nwib", "none of these words were in the bible"]
 
 
 # from dictCreation.py
